@@ -1,0 +1,78 @@
+body {
+  background: rgba(var(--primary-clr), 0.3);
+}
+
+#settings-form {
+  padding: 2em;
+  border-radius: 10px;
+  background: rgb(var(--primary-clr));
+}
+
+.info {
+  font-family: Roboto;
+  font-size: 1.1rem;
+  color: white;
+}
+
+.username {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.logout-btn {
+  display: block;
+  cursor: pointer;
+  margin: auto;
+  margin-top: 50px;
+  background: red;
+  border: none;
+  padding: 0.75em 1.75em;
+  color: white;
+  border-radius: 10px;
+  transition: background-color 250ms;
+}
+.logout-btn:hover {
+  background: rgb(196, 4, 4);
+}
+
+.profile {
+  position: relative;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.profile,
+#pfp {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+#pfp {
+  cursor: pointer;
+}
+#pfp:hover {
+  filter: brightness(80%);
+}
+
+.profile .fa-pen {
+  position: absolute;
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+.info .fa-pen {
+  font-size: 17px;
+  margin-left: 5px;
+}
+
+.fa-pen {
+  cursor: pointer;
+  color: white;
+  bottom: 30px;
+  right: 30px;
+}
+
+.profile:hover .fa-pen {
+  opacity: 1;
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>New Post</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/post.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="main-container">
+    <div class="container">
+        <form action="/post/" method="post" id="post-form">
+    
+            {% csrf_token %}
+        
+            <input type="text" id="post-title" autocomplete="off" name="blog_title" maxlength="50" placeholder="Blog Title" required/>
+        
+            <textarea id="post-content" name="blog_content" minlength="200" placeholder="Blog Content" required></textarea>
+        
+            <input type="submit" id="post-sbmt" value="Post" />
+    
+        </form>    
+    </div>
+</div>
+
+{% endblock %}

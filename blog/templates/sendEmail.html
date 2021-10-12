@@ -1,0 +1,49 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script type="text/javascript">
+
+    emailjs.init('user_c2JX6RarvofGE2IoEMmVG');
+
+    window.onload = function() {
+
+        const encrypt = str => {
+
+            const signature = ["@", "."].concat(Array.from(Array(52)).map((e, i) => i + 65 + (i >= 26 ? 6 : 0)).map(x => String.fromCharCode(x)).concat(Array.from(Array(10)).map((e, i) => i)));
+
+            let encrypted_string = "";
+
+            for (let i = 0; i < str.length; i++)
+                encrypted_string += signature[signature.indexOf(str[i]) + 5] + signature[signature.indexOf(str[i]) + 10]
+
+            return encrypted_string;
+
+        }
+        
+        let tempEmails = document.getElementById('emails').innerHTML;
+
+        const emails = [];
+        for (const email of eval(tempEmails)) emails.push(email);
+
+        document.getElementById('reset-form').addEventListener('submit', function(event) {
+
+            if (!emails.includes(this.email.value)) window.location.href = '/sent';
+
+            event.preventDefault();
+
+            alert(this.email.value)
+
+            const url = encrypt(this.email.value);
+
+            let message = document.createElement("input");
+            message.type = "hidden";
+            message.name = "message";
+            message.value = `Click on this link to verify your email : http://127.0.0.1:5000/emailVerification/${url}/${this.email.value}`;
+            this.appendChild(message);
+
+            // emailjs.sendForm('service_kzvkwfq', 'template_y8fdmud', this)
+            //     .then(() => {
+            //         console.log('Email Sent!!');
+            //         window.location.href = '/sent';
+            //     }, e => console.log('Email Failed to Send', e));
+        });
+    }
+</script>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/settings.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<title>Settings</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="main-container">
+    <div class="container">
+        <form action="/settings/" method="post" id="settings-form" onsubmit="return false;">
+            {% csrf_token %}
+            <div class="profile">
+                <label for="file-input">
+                    <img src="{% static 'images/'|add:user.picture %}" width="140px" id="pfp" />
+                    <i class="fas fa-pen"></i>
+                </label>
+                <input id="file-input" type="file" style="display: none">
+            </div>
+            <h1 class="username info"><span id="username">{{user.username}}</span><i class="fas fa-pen" id="edit-username"></i></h1>
+            <h2 class="email info"><span id="email">Email : {{user.email}}</span><i class="fas fa-pen" id="edit-email"></i></h2>
+            <button class="logout-btn" onclick="window.location.href='/logout/'">Logout</button>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/settings.js' %}"></script>
+
+{% endblock %}

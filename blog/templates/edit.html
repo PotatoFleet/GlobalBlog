@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Edit Blog</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/edit.css' %}" />
+{% endblock %}
+
+{% block body %}
+
+
+<div class="blog-container">
+
+    <form action="/editBlog/{{blog.id}}/" method="post">
+
+        {% csrf_token %}
+
+        <div class="blog-id" style="display: none">{{ blog.id }}</div>
+
+        <input type="text" placeholder="Blog title" name="blog-title" maxlength="50" class="blog-title" value="{{ blog.blog_title }}"/>
+
+        {% for user in users %}
+            {% if user.username == blog.sender %}
+                <img id="pfp" src="{% static 'images/'|add:user.picture %}" width="25px" />
+            {% endif %}
+        {% endfor %}
+
+        {% if blog.sender == request.session.user %}
+            <div class="blog-sender">{{ blog.sender }} (You)</div>
+        {% else %}
+            <div class="blog-sender">{{ blog.sender }}</div>
+        {% endif %}
+
+        <span class="blog-date">{{ blog.post_date }}</span>
+
+        <textarea placeholder="Blog content" name="blog-content" minlength="200" class="blog-main">{{ blog.blog_content }}</textarea>
+
+        <button type="submit" id="save-button">Save</button>
+
+    </form>
+</div>
+
+<script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
+{% endblock %}

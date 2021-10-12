@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}   
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="nav">
+        <ul class="nav-ul">
+            <div class="left">
+                <a href="{% url 'home' %}" id="home-link"><span>GlobalBlog</span></a>
+                {% if 'user' in request.session %}
+                    <a href="{% url 'post' %}" id="post-link"><span>Post</span></a>
+                    <a href="{% url 'user_blogs' %}" id="your-blogs"><span>Your Blogs</span></a>
+                    <a href="{% url 'liked_blogs' %}" id="liked-blogs"><span>Liked Blogs</span></a>
+                {% endif %}
+            </div>
+            <div class="right">
+                {% if 'user' not in request.session %}
+                    <a href="{% url 'login' %}" id="login-link"><span>Login</span></a>
+                {% else %}
+                {% for user in users %}
+                    {% if user.username == request.session.user %}
+                        <a href="{% url 'settings' %}" id="profile" >
+                            <img src="{% static 'images/'|add:user.picture %}" style="border-radius: 50%" width="40x" />
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+                
+            {% endif %}
+        </ul>
+    </div>
+
+    <!-- Main -->
+    {% block body %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="social">
+            <a href="https://www.youtube.com/channel/UCg7O8PQNdHRQOflj6gO2TDA" target="_blank">
+                <div class="fab fa-youtube"></div>
+            </a>
+            <a href="https://discord.gg/GVCGhZW4" target="_blank">
+                <div class="fab fa-discord"></div>
+            </a>
+        </div>
+        <div class="copyright">&#169; Potato Inc.</div>
+    </div>
+
+</body>
+</html>

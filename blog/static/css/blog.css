@@ -1,0 +1,123 @@
+.blog-container {
+  position: relative;
+  min-height: 100vh;
+  width: 70vw;
+  padding: 5em 0;
+  margin: auto;
+}
+
+* {
+  font-family: Roboto;
+}
+
+.blog-title {
+  display: inline-block;
+  font-size: 2.5em;
+  margin: 10px 0;
+}
+
+.blog-main {
+  word-break: break-word;
+}
+
+.edit-blog {
+  cursor: pointer;
+  float: right;
+  font-size: 1.25rem;
+  transform: translateY(120%);
+  color: gray;
+  transition: font-size 250ms;
+}
+
+.edit-blog:hover ~ .edit-text {
+  transform: scaleX(1) translate(-30%, 150%);
+}
+
+.edit-text {
+  float: right;
+  text-align: right;
+  transform-origin: 100% 50%;
+  transform: scaleX(0) translate(-30%, 150%);
+  transition: transform 250ms;
+}
+
+.blog-sender,
+.blog-date {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 50px;
+}
+
+#pfp {
+  transform: translateY(20%);
+}
+
+.blog-date {
+  float: right;
+}
+
+.blog-likes {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-size: 1.15rem;
+}
+
+.delete-blog {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  background-color: rgb(250, 38, 38);
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+}
+
+.fa-thumbs-up {
+  cursor: pointer;
+  color: gray;
+  margin-right: 5px;
+}
+.fa-thumbs-up:hover {
+  color: rgb(37, 37, 37);
+}
+
+.message {
+  color: white;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 1em;
+  margin: 1em;
+  font-family: sans-serif;
+  border-radius: 1em;
+  animation: fadeOut 6000ms ease forwards;
+  z-index: 10;
+}
+
+.error-message {
+  background: rgb(245, 25, 25);
+}
+
+.success-message {
+  background: rgb(25, 245, 25);
+}
+
+@keyframes fadeOut {
+  0% {
+    transform: translateX(150%);
+  }
+  5% {
+    transform: translateX(0%);
+  }
+  95% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(150%);
+  }
+}

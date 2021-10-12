@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{ blog.blog_title }}</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<input id="logged-in" type="hidden" value="{{ request.session.user }}" />
+
+<input type="hidden" id="liked-blog" value="{{ liked_blog }}" />
+
+<div class="blog-container">
+
+    <div class="blog-id" style="display: none">{{ blog.id }}</div>
+
+    <h1 class="blog-title">{{ blog.blog_title }}</h1>
+
+    <div class="edit-blog"><i class="fa fa-pen"></i></div>
+    <div class="edit-text">Edit Blog</div>
+
+    <br>
+
+    {% for user in users %}
+        {% if user.username == blog.sender %}
+            <img id="pfp" src="{% static 'images/'|add:user.picture %}" width="25px" />
+        {% endif %}
+    {% endfor %}
+
+    {% if blog.sender == request.session.user %}
+        <div class="blog-sender">{{ blog.sender }} (You)</div>
+    {% else %}
+        <div class="blog-sender">{{ blog.sender }}</div>
+    {% endif %}
+
+    <span class="blog-date">{{ blog.post_date }}</span>
+
+    <div class="blog-main">
+        {{ blog.blog_content }}
+    </div>
+
+    {% if blog.sender == request.session.user %}
+        <button class="delete-blog" id="delete">Delete Blog</button>
+    {% endif %}
+    
+    <div class="blog-likes"><i class="fas fa-thumbs-up like"></i><span class="likes">{{ blog.likes }}</span></div>
+</div>
+
+<div class="messages-container">
+    {% for message in messages %}
+        <span class="message {{ message.tags }}-message">{{ message }}</span>
+    {% endfor %}
+</div>
+
+<script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
+{% endblock %}

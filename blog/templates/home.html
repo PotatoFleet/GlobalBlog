@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Home</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock%}
+
+{% block body %}
+
+<input id="logged-in" type="hidden" value="{{ request.session.user }}" />
+
+<input type="hidden" id="sorted-by" value="{{ sorted_by }}" />
+
+<div class="heading">
+    <span id="blogs">Blogs</span>
+    <form action="" method="post">
+
+        {% csrf_token %}
+
+        <input type="text" name="sort" id="sort" style="display: none">
+
+        <div class="sort-by">Sort By :
+
+            <div class="sort-option">Latest</div> |
+            <div class="sort-option">Most Liked</div>
+        
+        </div>
+    </form>
+</div>
+
+<input type="hidden" id="liked" value="{{ liked_blogs }}">
+
+<div class="blogs">
+    {% for blog in blogs %}
+        <div class="blog">
+            <div class="blog-id" style="display: none">{{ blog.id }}</div>
+
+            {% for user in users %}
+                {% if user.username == blog.sender %}
+                    <img class="blog-sender-profile" src="{% static 'images/'|add:user.picture %}" width="25px" />
+                {% endif %}
+            {% endfor %}
+            
+            {% if blog.sender == request.session.user %}
+                <div class="blog-sender">{{ blog.sender }} (You)</div>
+            {% else %}
+                <div class="blog-sender">{{ blog.sender }}</div>
+            {% endif %}
+            <div class="blog-date">{{ blog.post_date }}</div>
+            <div class="blog-title">{{ blog.blog_title }}</div>
+            <div class="blog-content">{{ blog.blog_content }}</div>
+
+            <div class="blog-likes"><i class="fas fa-thumbs-up like"></i><span class="likes">{{ blog.likes }}</span></div>
+        
+        </div>
+    {% endfor %}
+</div>
+
+<div class="messages-container">
+    {% for message in messages %}
+        <span class="message {{ message.tags }}-message">{{ message }}</span>
+    {% endfor %}
+</div>
+
+<script>
+    if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+<script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+
+{% endblock %}

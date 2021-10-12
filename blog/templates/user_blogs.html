@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Your Blogs</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/user_blogs.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<input type="hidden" id="liked" value="{{ liked_blogs }}" />
+
+<h1 id="latest-blogs">Your Blogs</h1>
+
+<div class="blogs">
+  {% for blog in blogs reversed %}
+    {% if blog.sender == request.session.user %}
+        <div class="blog">
+            <div class="blog-id">{{ blog.id }}</div>
+            {% for user in users %}
+                {% if user.username == blog.sender %}
+                    <img class="blog-sender-profile" src="{% static 'images/'|add:user.picture %}" width="25px" />
+                {% endif %}
+            {% endfor %}
+            <div class="blog-sender">{{ blog.sender }}</div>
+            <div class="blog-date">{{ blog.post_date }}</div>
+            <div class="blog-title">{{ blog.blog_title }}</div>
+            <div class="blog-content">{{ blog.blog_content }}</div>
+        
+            <div class="blog-likes"><i class="fas fa-thumbs-up like"></i><span class="likes">{{ blog.likes }}</span></div>
+        
+        </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Email Sent</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/sent.css' %}">
+{% endblock %} 
+
+{% block body %}
+<div class="container">
+    
+    <h1 class="message">You will receive a verification email if your account was found</h1>
+
+    <button onclick="window.location.href='/'" id="home-btn">Go to Home</button>
+
+</div>
+{% endblock %}

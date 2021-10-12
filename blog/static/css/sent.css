@@ -1,0 +1,26 @@
+.container {
+  max-width: 40vw;
+  text-align: center;
+  padding: 2em;
+}
+
+.message {
+  font-family: Roboto;
+  font-weight: 600;
+}
+
+#home-btn {
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 20vw;
+  height: 7vh;
+  cursor: pointer;
+  font-size: 1.2em;
+  background-color: rgb(12, 151, 12);
+  transition: background-color 250ms;
+}
+
+#home-btn:hover {
+  background-color: rgb(17, 110, 17);
+}
