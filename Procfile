@@ -1,1 +1,2 @@
-web: gunicorn GlobalBlog.wsgi --log-file -
+web: gunicorn <project_name>.wsgi --log-file -
+
