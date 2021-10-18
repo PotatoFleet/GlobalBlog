@@ -107,7 +107,7 @@ for (const likeButton of likeButtons) {
           );
 
           $.ajax({
-            url: "http://127.0.0.1:5000/saveLikes/",
+            url: new URL('/saveLikes/', window.location.origin).toString(),
             processData: false,
             contentType: false,
             type: "POST",
@@ -135,8 +135,10 @@ document.querySelectorAll(".sort-option").forEach((el) => {
 
 const sortedBy = document.getElementById("sorted-by").value;
 
-if (sortedBy == "Latest")
+if (sortedBy == "Latest") {
   document.querySelectorAll(".sort-option")[0].classList.add("active");
+}
 
-if (sortedBy == "Most Liked")
+if (sortedBy == "Most Liked") {
   document.querySelectorAll(".sort-option")[1].classList.add("active");
+}

@@ -52,8 +52,9 @@
 
 #pfp {
   transform: translateY(20%);
+  border-radius: 50%;
 }
-
+a
 .blog-date {
   float: right;
 }

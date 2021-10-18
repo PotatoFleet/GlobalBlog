@@ -49,3 +49,7 @@ textarea:focus {
   border: 1px solid rgb(var(--primary-clr));
   box-shadow: 0 0 5px 0 rgb(var(--primary-clr));
 }
+
+#post-link::after {
+  transform: scaleX(1) !important;
+}

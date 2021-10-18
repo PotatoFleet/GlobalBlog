@@ -9,6 +9,8 @@
 
 {% block body %}
 
+<input id="logged-in" type="hidden" value="{{ request.session.user }}" />
+
 <input type="hidden" id="liked" value="{{ liked_blogs }}" />
 
 <h1 id="latest-blogs">Your Blogs</h1>

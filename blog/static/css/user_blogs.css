@@ -1,7 +1,3 @@
-body {
-  overflow-x: hidden;
-}
-
 .message {
   color: white;
   position: fixed;
@@ -77,6 +73,7 @@ body {
   position: absolute;
   left: 15px;
   top: 15px;
+  border-radius: 50%;
 }
 
 .blog-sender {
@@ -137,4 +134,8 @@ body {
 }
 .fa-thumbs-up:hover {
   color: rgb(37, 37, 37);
+}
+
+#your-blogs::after {
+  transform: scaleX(1) !important;
 }

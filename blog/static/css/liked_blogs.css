@@ -138,3 +138,7 @@ body {
 .fa-thumbs-up:hover {
   color: rgb(37, 37, 37);
 }
+
+#liked-blogs::after {
+  transform: scaleX(1);
+}
