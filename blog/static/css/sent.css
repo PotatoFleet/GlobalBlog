@@ -24,3 +24,8 @@
 #home-btn:hover {
   background-color: rgb(17, 110, 17);
 }
+
+.footer {
+  position: absolute;
+  bottom: -25vh;
+}
