@@ -1,2 +1,1 @@
-web: gunicorn <project_name>.wsgi --log-file -
-
+web: gunicorn GloablBlog.wsgi --log-file -
