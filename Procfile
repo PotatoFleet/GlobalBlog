@@ -1,1 +1,1 @@
-web: gunicorn GloablBlog.wsgi --log-file -
+web: gunicorn GlobalBlog.wsgi --log-file -
