@@ -13,7 +13,7 @@ fileInput.addEventListener("change", function () {
     pfp.src = src;
 
     $.ajax({
-      url: "http://127.0.0.1:5000/settings/savePicture/",
+      url: new URL('/settings/savePicture/', window.location.origin).toString(),
       processData: false,
       contentType: false,
       type: "POST",
