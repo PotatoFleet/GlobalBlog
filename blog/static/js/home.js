@@ -78,9 +78,11 @@ for (const title of blogTitles) {
 
 for (const likedBlog of likedBlogs) {
   for (const blog of blogs) {
-    blog_id = parseInt(blog.children[0].innerHTML);
+    const blog_id = parseInt(blog.querySelector('.blog-id').innerHTML);
     if (likedBlog == blog_id) {
-      blog.children[blog.children.length - 1].children[0].style.color = "black";
+      const l = blog.querySelector('.like')
+      l.classList.add("dark");
+      l.classList.remove("light");
     }
   }
 }
@@ -90,12 +92,14 @@ for (const likeButton of likeButtons) {
     if (loggedIn) {
       for (const child of likeButton.parentElement.children) {
         if (child.classList.contains("likes")) {
-          if (likeButton.style.color == "black") {
+          if (likeButton.classList.contains("dark")) {
             child.innerHTML = parseInt(child.innerHTML) - 1;
-            likeButton.style.color = "gray";
+            likeButton.classList.add("light");
+            likeButton.classList.remove("dark");
           } else {
             child.innerHTML = parseInt(child.innerHTML) + 1;
-            likeButton.style.color = "black";
+            likeButton.classList.add("dark");
+            likeButton.classList.remove("light");
           }
 
           const data = new FormData();

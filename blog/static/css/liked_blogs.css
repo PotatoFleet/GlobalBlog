@@ -130,15 +130,6 @@ body {
   bottom: 20px;
 }
 
-.fa-thumbs-up {
-  cursor: pointer;
-  color: gray;
-  margin-right: 5px;
-}
-.fa-thumbs-up:hover {
-  color: rgb(37, 37, 37);
-}
-
 #liked-blogs::after {
   transform: scaleX(1);
 }
