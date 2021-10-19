@@ -1,0 +1,2 @@
+# GlobalBlog
+A blogging website
