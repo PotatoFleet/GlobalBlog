@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'z!-s66=thr5hy#*@owz5sr9z8+u#&9^llh(_y)4oa@lz2dcgq-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env) 
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -137,4 +137,4 @@ STATIC_URL = '/static/'
 
 SESSION_COOKIE_AGE = 30*60
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

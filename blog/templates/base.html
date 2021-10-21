@@ -15,30 +15,21 @@
 <body>
     <!-- Navbar -->
     <div class="nav">
-        <ul class="nav-ul">
-            <div class="left">
-                <a href="{% url 'home' %}" id="home-link"><span>GlobalBlog</span></a>
-                {% if 'user' in request.session %}
-                    <a href="{% url 'post' %}" id="post-link"><span>Post</span></a>
-                    <a href="{% url 'user_blogs' %}" id="your-blogs"><span>Your Blogs</span></a>
-                    <a href="{% url 'liked_blogs' %}" id="liked-blogs"><span>Liked Blogs</span></a>
+        <div id="home-link"><a href="{% url 'home' %}">GlobalBlog</a></div>
+        {% if 'user' in request.session %}
+            <div id="post-link"><a href="{% url 'post' %}">Post</a></div>
+        {% endif %}
+        {% if 'user' not in request.session %}
+            <div id="login-link"><a href="{% url 'login' %}">Login</a></div>
+        {% else %}
+            {% for user in users %}
+                {% if user.username == request.session.user %}
+                    <a href="{% url 'settings' %}" id="profile">
+                        <img src="{% static 'images/'|add:user.picture %}" style="border-radius: 50%" width="40x" />
+                    </a>
                 {% endif %}
-            </div>
-            <div class="right">
-                {% if 'user' not in request.session %}
-                    <a href="{% url 'login' %}" id="login-link"><span>Login</span></a>
-                {% else %}
-                {% for user in users %}
-                    {% if user.username == request.session.user %}
-                        <a href="{% url 'settings' %}" id="profile" >
-                            <img src="{% static 'images/'|add:user.picture %}" style="border-radius: 50%" width="40x" />
-                        </a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-                
-            {% endif %}
-        </ul>
+            {% endfor %}
+        {% endif %}
     </div>
 
     <!-- Main -->

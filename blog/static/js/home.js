@@ -3,6 +3,7 @@ const sortButton = document.getElementById("sort-by");
 const blogTitles = document.querySelectorAll(".blog-title");
 const likeButtons = document.querySelectorAll(".like");
 const messages = document.querySelector(".messages-container");
+const filterForm = document.getElementById("filter-form");
 
 const loggedIn =
   document.getElementById("logged-in").value == "" ? false : true;
@@ -78,9 +79,9 @@ for (const title of blogTitles) {
 
 for (const likedBlog of likedBlogs) {
   for (const blog of blogs) {
-    const blog_id = parseInt(blog.querySelector('.blog-id').innerHTML);
+    const blog_id = parseInt(blog.querySelector(".blog-id").innerHTML);
     if (likedBlog == blog_id) {
-      const l = blog.querySelector('.like')
+      const l = blog.querySelector(".like");
       l.classList.add("dark");
       l.classList.remove("light");
     }
@@ -111,7 +112,7 @@ for (const likeButton of likeButtons) {
           );
 
           $.ajax({
-            url: new URL('/saveLikes/', window.location.origin).toString(),
+            url: new URL("/saveLikes/", window.location.origin).toString(),
             processData: false,
             contentType: false,
             type: "POST",
@@ -133,16 +134,40 @@ for (const likeButton of likeButtons) {
 document.querySelectorAll(".sort-option").forEach((el) => {
   el.addEventListener("click", () => {
     document.getElementById("sort").value = el.innerHTML;
-    el.parentNode.parentNode.submit();
+    filterForm.submit();
+  });
+});
+
+document.querySelectorAll(".show-option").forEach((el) => {
+  el.addEventListener("click", () => {
+    document.getElementById("show").value = el.innerHTML;
+    filterForm.submit();
   });
 });
 
 const sortedBy = document.getElementById("sorted-by").value;
 
-if (sortedBy == "Latest") {
-  document.querySelectorAll(".sort-option")[0].classList.add("active");
+switch (sortedBy) {
+  case "Latest":
+    document.querySelectorAll(".sort-option")[0].classList.add("active");
+    break;
+  case "Most Liked":
+    document.querySelectorAll(".sort-option")[1].classList.add("active");
+    break;
 }
 
-if (sortedBy == "Most Liked") {
-  document.querySelectorAll(".sort-option")[1].classList.add("active");
+if (loggedIn) {
+  const showBy = document.getElementById("show-by").value;
+
+  switch (showBy) {
+    case "All Blogs":
+      document.querySelectorAll(".show-option")[0].classList.add("active");
+      break;
+    case "Liked Blogs":
+      document.querySelectorAll(".show-option")[1].classList.add("active");
+      break;
+    case "Your Blogs":
+      document.querySelectorAll(".show-option")[2].classList.add("active");
+      break;
+  }
 }

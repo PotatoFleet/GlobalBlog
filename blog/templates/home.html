@@ -12,21 +12,33 @@
 <input id="logged-in" type="hidden" value="{{ request.session.user }}" />
 
 <input type="hidden" id="sorted-by" value="{{ sorted_by }}" />
+<input type="hidden" id="show-by" value="{{ show }}" />
 
 <div class="heading">
     <span id="blogs">Blogs</span>
-    <form action="" method="post">
+    <form action="" method="post" id="filter-form">
 
         {% csrf_token %}
 
-        <input type="text" name="sort" id="sort" style="display: none">
+        <input type="text" name="sort" id="sort" style="display: none" />
+        <input type="text" name="show" id="show" style="display: none" />
 
-        <div class="sort-by">Sort By :
+        <div class="filters">
 
-            <div class="sort-option">Latest</div> |
-            <div class="sort-option">Most Liked</div>
-        
+            {% if request.session.user %}
+                <div class="show">Show :
+                    <div class="show-option">All Blogs</div> |
+                    <div class="show-option">Liked Blogs</div> |
+                    <div class="show-option">Your Blogs</div>
+                </div>
+            {% endif %}
+    
+            <div class="sort-by">Sort By :
+                <div class="sort-option">Latest</div> |
+                <div class="sort-option">Most Liked</div>
+            </div>
         </div>
+
     </form>
 </div>
 

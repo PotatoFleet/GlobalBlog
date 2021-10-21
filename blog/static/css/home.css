@@ -47,13 +47,21 @@
   text-decoration-color: rgb(var(--primary-clr));
 }
 
-.sort-by {
+.filters {
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
-  margin-bottom: 5px;
-  text-align: right;
 }
 
 .sort-by > .sort-option {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.01rem;
+  background: none;
+  border: none;
+}
+
+.show > .show-option {
   display: inline-block;
   cursor: pointer;
   font-size: 1.01rem;
@@ -145,4 +153,11 @@
   position: absolute;
   left: 20px;
   bottom: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .blog-date {
+    top: initial;
+    bottom: 20px;
+  }
 }

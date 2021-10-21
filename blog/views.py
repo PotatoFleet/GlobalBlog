@@ -10,20 +10,46 @@ import json
 
 def home(request):
 
-    sort_by = "Latest"
+    if 'sort_by' not in request.session:
+        request.session['sort_by'] = "Latest"
+
+    if 'show' not in request.session:
+        request.session['show'] = "All Blogs"
+
+    sort_by = request.session['sort_by']
+    show = request.session['show']
 
     blogs = Post.objects.all()[::-1]
 
     if request.method == 'POST':
-        sort_by = request.POST['sort']
+        show = request.POST['show'] if request.POST['show'] != "" else show
+        request.session['show'] = show
+
+        if show == "Liked Blogs":
+            blogs = []
+            for blog in User.objects.get(username=request.session['user']).likedblogs_set.all():
+                try:
+                    blogs.append(Post.objects.get(id=blog.blog_id))
+                except:
+                    pass
+
+        elif show == "Your Blogs":
+            blogs[:] = [blog for blog in blogs if blog.sender ==
+                        request.session['user']]
+
+        sort_by = request.POST['sort'] if request.POST['sort'] != "" else sort_by
+        request.session['sort_by'] = sort_by
 
         if sort_by == "Most Liked":
-            blogs = [post[1] for post in sorted(zip([post.likes for post in Post.objects.all(
-            )], Post.objects.all()), key=lambda x: x[0])][::-1]
+            blogs = [post[1] for post in sorted(zip([post.likes for post in blogs],
+                                                    blogs), key=lambda x: x[0])][::-1]
+        elif sort_by == "Latest":
+            blogs = blogs[::-1]
 
     return render(request, 'home.html', {
         'blogs': blogs,
         'sorted_by': sort_by,
+        'show': show,
         'liked_blogs': [blog.blog_id for blog in User.objects.get(username=request.session['user']).likedblogs_set.all()] if "user" in request.session else None
     })
 
@@ -62,8 +88,7 @@ def login(request):
         password = request.POST['password']
 
         try:
-            test_user = User.objects.get(
-                username=username, password=password)
+            User.objects.get(username=username, password=password)
         except:
             messages.error(request, 'Invalid username or password')
             return redirect('login')
